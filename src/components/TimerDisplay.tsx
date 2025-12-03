@@ -52,14 +52,14 @@ export function TimerDisplay({
 
     return (
         <div className={clsx(
-            'flex flex-col items-center justify-center w-full h-full min-h-[400px] rounded-3xl transition-colors duration-500 p-8 shadow-2xl',
+            'flex flex-col items-center justify-center w-full h-full min-h-[400px] rounded-3xl transition-colors duration-500 p-4 sm:p-8 shadow-2xl',
             PHASE_COLORS[status]
         )}>
             <div className="text-2xl font-medium tracking-wider uppercase opacity-90 mb-4">
                 {PHASE_LABELS[status]}
             </div>
 
-            <div className="text-9xl font-bold tabular-nums tracking-tight mb-8">
+            <div className="text-7xl md:text-9xl font-bold tabular-nums tracking-tight mb-8">
                 {formatTime(timeLeft)}
             </div>
 

@@ -84,7 +84,7 @@ export function ProfileEditor({
     };
 
     return (
-        <div className="bg-gray-900 p-6 rounded-3xl shadow-xl w-full max-w-md mx-auto">
+        <div className="bg-gray-900 p-4 sm:p-6 rounded-3xl shadow-xl w-full mx-auto">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-white">Configuration</h2>
                 <div className="flex gap-2">
@@ -114,7 +114,7 @@ export function ProfileEditor({
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <TimeInput
                         label="Warm Up"
                         seconds={profile.warmupSeconds}
@@ -127,7 +127,7 @@ export function ProfileEditor({
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <TimeInput
                         label="Work"
                         seconds={profile.workSeconds}

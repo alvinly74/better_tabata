@@ -51,11 +51,10 @@ function App() {
         </a>
       </header>
 
-      <main className="container mx-auto px-4 pt-20 pb-24 min-h-screen flex flex-col items-center justify-center">
-
+      <main className="w-full px-4 pt-20 pb-24 min-h-screen flex flex-col justify-center">
         {/* Timer View */}
         {view === 'timer' && (
-          <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
             <TimerDisplay
               status={timer.status}
               timeLeft={timer.timeLeft}
@@ -72,7 +71,7 @@ function App() {
 
         {/* Editor View */}
         {view === 'editor' && (
-          <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
             <ProfileEditor
               profile={activeProfile}
               profiles={profiles}

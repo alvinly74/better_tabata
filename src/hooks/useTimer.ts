@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { TabataProfile, TimerState } from '../types';
+import { playBeep } from '../utils/sound';
 
 export function useTimer(profile: TabataProfile) {
     const [status, setStatus] = useState<TimerState>('IDLE');
@@ -53,6 +54,10 @@ export function useTimer(profile: TabataProfile) {
         intervalRef.current = window.setInterval(() => {
             setTimeLeft((prev) => {
                 if (prev > 1) {
+                    // Play beep at 3, 2, 1
+                    if (prev <= 4 && prev > 1) {
+                        playBeep(880, 0.1);
+                    }
                     return prev - 1;
                 }
 
