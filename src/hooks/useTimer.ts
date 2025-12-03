@@ -62,15 +62,6 @@ export function useTimer(profile: TabataProfile) {
 
                 // Time is up (prev === 1, so next is 0), transition needed
                 // We return 0 here, and let the effect below handle the state change
-                // Or handle it right here. Handling it here avoids a render cycle with 0.
-
-                // Let's handle transition logic here for atomicity
-                handleTransition();
-                return 0; // This value might be overridden by handleTransition's state updates if we were using a reducer, 
-                // but with multiple useState, we need to be careful.
-                // Actually, it's better to use a reducer for complex state machines, but let's stick to this for simplicity if possible.
-                // To avoid "0" flash, we can set the new time immediately.
-
                 return 0;
             });
         }, 1000);
