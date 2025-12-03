@@ -51,45 +51,43 @@ function App() {
         </a>
       </header>
 
-      <main className="container mx-auto px-4 pt-20 pb-24 min-h-screen flex flex-col md:flex-row gap-8 items-center justify-center">
+      <main className="container mx-auto px-4 pt-20 pb-24 min-h-screen flex flex-col items-center justify-center">
 
         {/* Timer View */}
-        <div className={clsx(
-          "w-full max-w-md transition-all duration-500",
-          view === 'editor' && "hidden md:block md:opacity-50 md:scale-95"
-        )}>
-          <TimerDisplay
-            status={timer.status}
-            timeLeft={timer.timeLeft}
-            currentSet={timer.currentSet}
-            totalSets={timer.totalSets}
-            isRunning={timer.isRunning}
-            onStart={timer.start}
-            onPause={timer.pause}
-            onReset={timer.reset}
-            onSkip={timer.skip}
-          />
-        </div>
+        {view === 'timer' && (
+          <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <TimerDisplay
+              status={timer.status}
+              timeLeft={timer.timeLeft}
+              currentSet={timer.currentSet}
+              totalSets={timer.totalSets}
+              isRunning={timer.isRunning}
+              onStart={timer.start}
+              onPause={timer.pause}
+              onReset={timer.reset}
+              onSkip={timer.skip}
+            />
+          </div>
+        )}
 
         {/* Editor View */}
-        <div className={clsx(
-          "w-full max-w-md transition-all duration-500",
-          view === 'timer' && "hidden md:block"
-        )}>
-          <ProfileEditor
-            profile={activeProfile}
-            profiles={profiles}
-            onUpdate={updateProfile}
-            onDelete={deleteProfile}
-            onSelect={setActiveProfileId}
-            onAdd={handleAddProfile}
-          />
-        </div>
+        {view === 'editor' && (
+          <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <ProfileEditor
+              profile={activeProfile}
+              profiles={profiles}
+              onUpdate={updateProfile}
+              onDelete={deleteProfile}
+              onSelect={setActiveProfileId}
+              onAdd={handleAddProfile}
+            />
+          </div>
+        )}
 
       </main>
 
       {/* Mobile Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-2 md:hidden flex justify-around z-20">
+      <nav className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-2 flex justify-around z-20">
         <button
           onClick={() => setView('timer')}
           className={clsx(

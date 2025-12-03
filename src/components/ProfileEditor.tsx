@@ -33,6 +33,17 @@ export function ProfileEditor({
         onUpdate({ ...profile, [field]: value });
     };
 
+    const totalDuration =
+        profile.warmupSeconds +
+        (profile.workSeconds + profile.restSeconds) * profile.sets +
+        profile.cooldownSeconds;
+
+    const formatDuration = (seconds: number) => {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m}m ${s}s`;
+    };
+
     const TimeInput = ({ label, seconds, onChange }: { label: string, seconds: number, onChange: (val: number) => void }) => {
         const m = Math.floor(seconds / 60);
         const s = seconds % 60;
@@ -130,7 +141,10 @@ export function ProfileEditor({
                 </div>
 
                 <div className="flex flex-col gap-1">
-                    <label className="text-xs font-medium text-gray-400 uppercase tracking-wider">Sets</label>
+                    <div className="flex justify-between items-baseline">
+                        <label className="text-xs font-medium text-gray-400 uppercase tracking-wider">Sets</label>
+                        <span className="text-xs text-blue-400 font-medium">Total: {formatDuration(totalDuration)}</span>
+                    </div>
                     <input
                         type="number"
                         min="1"
