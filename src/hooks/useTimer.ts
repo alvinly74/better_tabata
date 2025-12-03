@@ -13,7 +13,6 @@ export function useTimer(profile: TabataProfile) {
 
     // Sound effect refs (placeholders for now)
     // const playBeep = () => { /* TODO: Implement sound */ };
-    const playWhistle = () => { /* TODO: Implement sound */ };
 
     const start = useCallback(() => {
         if (status === 'IDLE' || status === 'FINISHED') {
@@ -56,7 +55,7 @@ export function useTimer(profile: TabataProfile) {
                 if (prev > 1) {
                     // Play beep at 3, 2, 1
                     if (prev <= 4 && prev > 1) {
-                        playBeep(880, 0.1);
+                        playBeep(880, 0.1, 'sine', 0.2);
                     }
                     return prev - 1;
                 }
@@ -90,12 +89,14 @@ export function useTimer(profile: TabataProfile) {
     // The effect depends on them, so it re-runs when they change.
 
     const handleTransition = () => {
+        // Play "Go" sound for new phase
+        playBeep(1200, 0.3, 'sine', 0.3);
+
         // Determine next state based on current state
         switch (status) {
             case 'WARMUP':
                 setStatus('WORK');
                 setTimeLeft(profile.workSeconds);
-                playWhistle();
                 break;
             case 'WORK':
                 if (currentSet < profile.sets) {
@@ -105,18 +106,15 @@ export function useTimer(profile: TabataProfile) {
                     setStatus('COOLDOWN');
                     setTimeLeft(profile.cooldownSeconds);
                 }
-                playWhistle();
                 break;
             case 'REST':
                 setStatus('WORK');
                 setTimeLeft(profile.workSeconds);
                 setCurrentSet((prev) => prev + 1);
-                playWhistle();
                 break;
             case 'COOLDOWN':
                 setStatus('FINISHED');
                 setIsRunning(false);
-                playWhistle();
                 break;
             default:
                 break;
